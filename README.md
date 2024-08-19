@@ -7,7 +7,7 @@ RAVE is  a framework for ego-velocity estimation that relies on 3D automotive ra
 
 The figure below representes the proposed RAVE framework pipeline scheme. Through our filtering method we determine the feasibility of the estimated velocity. The accepted values serve as inputs for the next step, while rejected values are discarded.
 
-<img src="rave.png" width="450"/>
+<img src="rave.png" width="800"/>
 
 
 
