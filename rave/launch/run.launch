@@ -1,0 +1,9 @@
+
+<launch>
+
+  <rosparam command="load" file="$(find rave)/config/params.yaml" />
+
+  <node pkg="rave" type="estimate_velocity.py" name="rave_estimate_node" output="screen">
+  </node>
+
+</launch>

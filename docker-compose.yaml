@@ -1,0 +1,55 @@
+services:
+  ros1:
+    image: lsd_noetic:latest
+    container_name: noetic_rave
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    #  Interactive mode
+    stdin_open: true
+    tty: true
+
+
+    # Networking and IPC for ROS 
+    network_mode: host
+    ipc: host
+    # Needed to display graphical applications
+    privileged: true
+
+    environment:
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      # Allows graphical programs in the container.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY:-$HOME/.Xauthority}:/root/.Xauthority
+      
+      # TODO - modify
+      # modify the dataset paths to datasets folder
+      - <path-to-IRS-dataset>:/datasets  # e.g. - ~/Dataset/IRS:/datasets
+
+
+
+    command:
+      - /bin/bash
+      - -c
+      - |
+        # Ensure timeouts are set to a minimum to enable faster exit
+        sed -i -e 's/_TIMEOUT_SIGINT  = 15.0/_TIMEOUT_SIGINT  = 1e-323/g' \
+          -e 's/_TIMEOUT_SIGTERM = 2.0/_TIMEOUT_SIGTERM = 1e-323/g' \
+            /opt/ros/noetic/lib/python3/dist-packages/roslaunch/nodeprocess.py
+
+        # Set folder for RUNTIME_DIR for RViz
+        mkdir -p tmp/runtime-root && chmod 0700 tmp/runtime-root
+
+        # Build the catkin workspace
+        cd /catkin_ws && catkin_make
+        
+        # Source the workspace setup
+        source /catkin_ws/devel/setup.bash	
+        
+        bash

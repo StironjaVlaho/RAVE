@@ -1,0 +1,10 @@
+<launch>
+
+  <arg name="bag_file" default="/datasets/mocap_easy.bag"/>
+
+
+  <rosparam command="load" file="$(find rave)/config/params.yaml" />
+  <node pkg="rave" type="estimate_velocity.py" name="rave_estimate_node" output="screen"/>
+  <node pkg="rosbag" type="play" name="rosbag_play" args="$(arg bag_file) --clock" output="screen" />
+
+</launch>

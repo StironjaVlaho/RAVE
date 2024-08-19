@@ -1,0 +1,68 @@
+# Topics names
+radar_topic: "/sensor_platform/radar/scan"  # IRS topic name
+#radar_topic: "/mmWaveDataHdl/RScan"          # Coloradar singe-chip topic name 
+pub_name: "radar/velocity"
+
+type_dataset: IRS    # IRS, Coloradar, VOD
+
+# Full estimation methods
+outlier_rejection_method: RANSAC    # RANSAC (default), MLESAC, GNC, OPT (norm_method)
+inlier_threshold: 0.15            # Inlier threshold [m]   
+
+# Ego-velocity estimation
+inliers_estimation_method: OPT    # LS (Default), WLS, TLS, WTLS, OPT (norm_method), None (already estimated using Cauchy, Huber, General) 
+
+# Norm type 
+norm_method: Cauchy    # Cauchy, Huber, General (Barron), None
+k: 0.15   # k -> Cauchy, Huber
+
+# If use_norm = General
+barron_a: 2
+barron_c: 0.1
+
+# Filtering parameters
+min_range: 1                     # Minimum range in meters 
+max_range: 100                      # Maximum range in meters
+elevation_threshold_deg: 180         # Elevation threshold in degrees [deg]
+azimuth_threshold_deg: 180           # Azimuth threshold in degrees [deg]
+min_snr: 5                          # Minimum SNR threshold [dB]
+
+# Zero velocity detection
+zero_velocity_threshold: 0.05        # Zero velocity threshold [m/s]
+outlier_percentage: 0.25             # Outlier percentage threshold
+sigma_zero_vec_x: 0.081               # Zero velocity sigma in x [m/s]
+sigma_zero_vec_y: 0.081               # Zero velocity sigma in y [m/s]
+sigma_zero_vec_z: 0.081               # Zero velocity sigma in z [m/s]
+
+# Ransac parameters
+outlier_probability: 0.5           # Outlier probability  #0.5, 0.9999
+success_probability: 0.99999      # Success probability
+
+# Mlesac parameters
+iteration_mlesac: 300               # Number of iterations     
+converge_thres: 1                 # change in data log likelihood fcn required to indicate convergence
+sigma_vr_mlesac: 0.075             
+
+
+# GNC parameres
+doppler_sigma: 1                # Doppler sigma threshold [m/s] IRS- 1,0.2
+percentage_inliers_gnc: 0.3           # Percentage of inliers  - just for outlier rejection method
+
+
+# Optimization parameters
+estimate_cov: True   # Estimate covariance matrix 
+
+# Additional filters
+use_zero_velocity: True # Use zero velocity detection
+
+# Proposed mean filter
+use_consecutive_diff: True   # Use our proposed mean filter
+window_size: 5 
+max_a: 10.0                        # Maximum acceleration [m/s^2]   
+mean_filter_threshold: 7.5        # Mean filter threshold [m/s]  3
+
+
+
+
+
+
