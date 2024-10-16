@@ -116,13 +116,13 @@ Once the image is built, you can run the container using Docker Compose:
 
 ## Citation
 If you find this work beneficial to your academic research, we would greatly appreciate it if you could reference our paper in your citations.
-```bibtex
-@article{vstironja2024rave,
+```
+@inproceedings{vstironja2024rave,
   title={RAVE: A Framework for Radar Ego-Velocity Estimation},
   author={{\v{S}}tironja, Vlaho-Josip and Petrovi{\'c}, Luka and Per{\v{s}}i{\'c}, Juraj and Markovi{\'c}, Ivan and Petrovi{\'c}, Ivan},
-  journal={arXiv preprint arXiv:2406.18850},
-  year={2024}
-} 
+  booktitle={2024 IEEE International Conference on Multisensor Fusion and Integration for Intelligent Systems (MFI)},
+  year={2024},
+  organization={IEEE}
 }
 ```
 
